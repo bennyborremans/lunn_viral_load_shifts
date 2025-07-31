@@ -205,10 +205,10 @@ prepdata <- function(urv_data, threshold){
 ##-----------------------------------------Load data----------------------------------------##
 ##------------------------------------------------------------------------------------------##
 
-continuous_ur_s <- readRDS("Data/Processed/continuous_ur_s.rds") ## Names and locations of sites
-urv_data <- readRDS("Data/Processed/urv_data.rds")   ## Urine sampling meta-data with virus data
+continuous_ur_s <- read.csv("Data/Processed/continuous_ur_s.csv") ## Names and locations of sites
+urv_data <- read.csv("Data/Processed/urv_data.csv")   ## Urine sampling meta-data with virus data
 genomeHev <- read.csv("Data/Processed/Ct-to-genome-convert_HeV.csv") ## Ct to genome per ml conversion
-spillover <- readRDS("Data/Processed/spillover.rds") ## spillovers within study
+spillover <- read.csv("Data/Processed/spillover.csv") ## spillovers within study
 
 ##-------------------------------------Numbers over sheet-----------------------------------##
 bats_over_sheet_summary <- urv_data %>%
@@ -511,29 +511,29 @@ if(run.again) {
   }
   
   # save output so it doesn't have the be run again
-  saveRDS(perm.out, paste0("perm.out.",run.date,".RDS"))
-  saveRDS(perm.out.stats.gam.poisson, paste0("perm.out.stats.gam.poisson.",run.date,".RDS"))
-  saveRDS(perm.out.stats.gam.binomial, paste0("perm.out.stats.gam.binomial.",run.date,".RDS"))
-  saveRDS(perm.out.stats.glm.poisson, paste0("perm.out.stats.glm.poisson.",run.date,".RDS"))
-  saveRDS(perm.out.stats.glm.binomial, paste0("perm.out.stats.glm.binomial.",run.date,".RDS"))
+  write.csv(perm.out, paste0("perm.out.",run.date,".csv"))
+  write.csv(perm.out.stats.gam.poisson, paste0("perm.out.stats.gam.poisson.",run.date,".csv"))
+  write.csv(perm.out.stats.gam.binomial, paste0("perm.out.stats.gam.binomial.",run.date,".csv"))
+  write.csv(perm.out.stats.glm.poisson, paste0("perm.out.stats.glm.poisson.",run.date,".csv"))
+  write.csv(perm.out.stats.glm.binomial, paste0("perm.out.stats.glm.binomial.",run.date,".csv"))
   
-  saveRDS(obs.out, paste0("obs.out.",run.date,".RDS"))
-  saveRDS(obs.out.stats.gam.poisson, paste0("obs.out.stats.gam.poisson.",run.date,".RDS"))
-  saveRDS(obs.out.stats.gam.binomial, paste0("obs.out.stats.gam.binomial.",run.date,".RDS"))
-  saveRDS(obs.out.stats.glm.poisson, paste0("obs.out.stats.glm.poisson.",run.date,".RDS"))
-  saveRDS(obs.out.stats.glm.binomial, paste0("obs.out.stats.glm.binomial.",run.date,".RDS"))
+  write.csv(obs.out, paste0("obs.out.",run.date,".csv"))
+  write.csv(obs.out.stats.gam.poisson, paste0("obs.out.stats.gam.poisson.",run.date,".csv"))
+  write.csv(obs.out.stats.gam.binomial, paste0("obs.out.stats.gam.binomial.",run.date,".csv"))
+  write.csv(obs.out.stats.glm.poisson, paste0("obs.out.stats.glm.poisson.",run.date,".csv"))
+  write.csv(obs.out.stats.glm.binomial, paste0("obs.out.stats.glm.binomial.",run.date,".csv"))
 } else {
-  perm.out = readRDS(paste0("perm.out.",run.date,".RDS"))
-  perm.out.stats.gam.poisson = readRDS(paste0("perm.out.stats.gam.poisson.",run.date,".RDS"))
-  perm.out.stats.gam.binomial = readRDS(paste0("perm.out.stats.gam.binomial.",run.date,".RDS"))
-  perm.out.stats.glm.poisson = readRDS(paste0("perm.out.stats.glm.poisson.",run.date,".RDS"))
-  perm.out.stats.glm.binomial = readRDS(paste0("perm.out.stats.glm.binomial.",run.date,".RDS"))
+  perm.out = read.csv(paste0("perm.out.",run.date,".csv"))
+  perm.out.stats.gam.poisson = read.csv(paste0("perm.out.stats.gam.poisson.",run.date,".csv"))
+  perm.out.stats.gam.binomial = read.csv(paste0("perm.out.stats.gam.binomial.",run.date,".csv"))
+  perm.out.stats.glm.poisson = read.csv(paste0("perm.out.stats.glm.poisson.",run.date,".csv"))
+  perm.out.stats.glm.binomial = read.csv(paste0("perm.out.stats.glm.binomial.",run.date,".csv"))
   
-  obs.out = readRDS(paste0("obs.out.",run.date,".RDS"))
-  obs.out.stats.gam.poisson = readRDS(paste0("obs.out.stats.gam.poisson.",run.date,".RDS"))
-  obs.out.stats.gam.binomial = readRDS(paste0("obs.out.stats.gam.binomial.",run.date,".RDS"))
-  obs.out.stats.glm.poisson = readRDS(paste0("obs.out.stats.glm.poisson.",run.date,".RDS"))
-  obs.out.stats.glm.binomial = readRDS(paste0("obs.out.stats.glm.binomial.",run.date,".RDS"))
+  obs.out = read.csv(paste0("obs.out.",run.date,".csv"))
+  obs.out.stats.gam.poisson = read.csv(paste0("obs.out.stats.gam.poisson.",run.date,".csv"))
+  obs.out.stats.gam.binomial = read.csv(paste0("obs.out.stats.gam.binomial.",run.date,".csv"))
+  obs.out.stats.glm.poisson = read.csv(paste0("obs.out.stats.glm.poisson.",run.date,".csv"))
+  obs.out.stats.glm.binomial = read.csv(paste0("obs.out.stats.glm.binomial.",run.date,".csv"))
 }
 
 # add xmin and xmax dates for quantile plotting
