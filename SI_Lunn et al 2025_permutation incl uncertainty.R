@@ -211,10 +211,10 @@ prepdata <- function(urv_data, threshold, incl_prev_uncertainty = F){
 ##-----------------------------------------Load data----------------------------------------##
 ##------------------------------------------------------------------------------------------##
 
-continuous_ur_s <- readRDS("Data/Processed/continuous_ur_s.rds") ## Names and locations of sites
-urv_data <- readRDS("Data/Processed/urv_data.rds")   ## Urine sampling meta-data with virus data
+continuous_ur_s <- read.csv("Data/Processed/continuous_ur_s.csv") ## Names and locations of sites
+urv_data <- read.csv("Data/Processed/urv_data.csv")   ## Urine sampling meta-data with virus data
 genomeHev <- read.csv("Data/Processed/Ct-to-genome-convert_HeV.csv") ## Ct to genome per ml conversion
-spillover <- readRDS("Data/Processed/spillover.rds") ## spillovers within study
+spillover <- read.csv("Data/Processed/spillover.csv") ## spillovers within study
 
 ##-------------------------------------Numbers over sheet-----------------------------------##
 bats_over_sheet_summary <- urv_data %>%
