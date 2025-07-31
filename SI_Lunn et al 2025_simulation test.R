@@ -29,9 +29,9 @@ library(splines)
 # for two possible prevalences per session, low or high
 
 
-sim_for_perm = function(n_sessions, prev_low, prev_high, n_per_session, n_per_sample_low, n_per_sample_high) {
+sim_for_perm = function(n_sessions, prev_low, prev_high, n_per_session, n_per_sample_low, n_per_sample_high, prev_ct_skew_threshold) {
         sim_out = data.frame(session = rep(1:n_sessions, each = n_per_session),
-                             session_prev = rep(sample(c(prev_low, prev_high),size = n_sessions, replace=T, prob = c(0.5,0.5)), each = n_per_session),
+                             session_prev = rep(rnorm(n = n_sessions, sample(c(prev_low, prev_high),size = n_sessions, replace=T, prob = c(0.5,0.5)), sd = 0.02), each = n_per_session),
                              uniform_ct = NA,
                              skewed_ct = NA,
                              leftskewed_ct_all_prev = NA,
@@ -73,7 +73,7 @@ sim_for_perm = function(n_sessions, prev_low, prev_high, n_per_session, n_per_sa
                         
                         # skewed with prev
                         # log-skewed virus concentrations, prevalence-dependent
-                        if(sim_out$session_prev[i] == prev_low) {
+                        if(sim_out$session_prev[i] < prev_ct_skew_threshold) {
                                 # prev low = lower concentrations more likely
                                 cur_virus_conc = exp(log(60) + (log(7000000) - log(60)) * rbeta(sim_out$pos_bats[i], 1, 2))   # sampling from declining beta distribution, then converting to range of possible virus concentrations
                         } else {
@@ -154,7 +154,7 @@ n_per_session <- 100
 
 
 # simulate data
-sim_dat = sim_for_perm(n_sessions = n_sessions, prev_low = 0.05, prev_high = 0.2, n_per_session = n_per_session, n_per_sample_low = 1, n_per_sample_high = 10)
+sim_dat = sim_for_perm(n_sessions = n_sessions, prev_low = 0.05, prev_high = 0.2, n_per_session = n_per_session, n_per_sample_low = 1, n_per_sample_high = 10, prev_ct_skew_threshold = 0.12)
 
 
 
